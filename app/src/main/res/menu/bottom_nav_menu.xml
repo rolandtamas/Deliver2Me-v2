@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Acasă" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/myads"
+        android:title="Anunțurile mele"
+        android:titleCondensed="Anunțuri"/>
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/messages"
+        android:title="Mesajele mele"
+        android:titleCondensed="Mesaje"/>
+    <item
+        android:title="Profilul meu"
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/cog"/>
+    <item
+        android:title="Delogare"
+        android:id="@+id/navigation_logout"
+        android:icon="@drawable/logout"/>
+
+
+</menu>

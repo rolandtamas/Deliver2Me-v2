@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "349305942454",
+    "firebase_url": "https://deliver2me-88d32.firebaseio.com",
+    "project_id": "deliver2me-88d32",
+    "storage_bucket": "deliver2me-88d32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349305942454:android:f7e6526bd5e9e2a4e6d117",
+        "android_client_info": {
+          "package_name": "com.app.deliver2me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349305942454-clcuri125pm2mopjh0iclatpsgr57s6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNLNzWVzNqlFukhWgweT1GBy1ijr0hQ1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349305942454-clcuri125pm2mopjh0iclatpsgr57s6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
