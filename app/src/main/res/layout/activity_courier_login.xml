@@ -7,12 +7,10 @@
     tools:context=".activities.LoginActivity"
     android:orientation="vertical"
     android:gravity="center">
-
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/favicon" />
-
+        android:src="@drawable/favicon"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="13dp"
         android:text="Ține-mă minte" />
 
     <com.google.android.material.button.MaterialButton
@@ -61,7 +59,7 @@
         android:text="Loghează-te"
         android:id="@+id/loginButton"/>
     <LinearLayout
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="17dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -73,7 +71,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/registerButton"
+            android:id="@+id/RegisterButton"
             android:text="Înregistrează-te"/>
     </LinearLayout>
     <LinearLayout
@@ -91,7 +89,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/switch_account"
             android:textSize="15sp"
-            android:text="Logheaza-te ca si curier"/>
+            android:text="Logheaza-te ca si utilizator"/>
 
     </LinearLayout>
 

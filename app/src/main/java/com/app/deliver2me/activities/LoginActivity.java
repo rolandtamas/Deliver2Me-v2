@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.deliver2me.R;
@@ -32,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox rememberMeCheck;
     private Button loginButton;
     private Button registerButton;
+    private Button courierRegisterButton;
+    private TextView switchAccount;
     private FirebaseAuth mAuth;
 
     private String email;
@@ -82,6 +85,9 @@ public class LoginActivity extends AppCompatActivity {
         rememberMeCheck = findViewById(R.id.rememberMeCheckBox);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
+        courierRegisterButton = findViewById(R.id.courierRegisterButton);
+
+        switchAccount = findViewById(R.id.switch_account);
     }
 
     private void setOnClickListeners()
@@ -97,8 +103,9 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     editor.putString("Email", email);
                     editor.putString("Password",password);
-                    editor.apply();
                     rememberMeCheck.setChecked(true);
+                    editor.apply();
+
                 }
                 else
                 {
@@ -115,6 +122,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        courierRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CourierRegisterActivity.class));
+            }
+        });
+
+        switchAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, CourierLoginActivity.class));
             }
         });
 

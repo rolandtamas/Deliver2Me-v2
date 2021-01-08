@@ -8,17 +8,44 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myads"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="350dp"
+        android:gravity="start">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNewEntryFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="50dp"
+            android:background="@android:color/black"
+            android:src="@drawable/ic_baseline_add_24"
+            app:fabSize="normal"
+            android:contentDescription="Adauga un nou anunt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/addNewEntryFab"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="50dp"
+            android:text="Adaugă un nou anunț" />
+
+    </RelativeLayout>
+
+
 </LinearLayout>

@@ -13,9 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Deliver2Me">
+        <activity android:name=".activities.ViewAdActivity"></activity>
+        <activity android:name=".activities.CourierLoginActivity" />
+        <activity android:name=".activities.NewEntryActivity" />
+        <activity android:name=".activities.CourierRegisterActivity" />
         <activity
             android:name=".activities.FrontPageActivity"
-            android:label="@string/title_activity_front_page"></activity>
+            android:label="@string/title_activity_front_page" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SplashScreenActivity">

@@ -11,6 +11,8 @@ import com.app.deliver2me.activities.ui.logout.LogoutFragment;
 import com.app.deliver2me.activities.ui.notifications.NotificationsFragment;
 import com.app.deliver2me.activities.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
     private ProfileFragment profileFragment;
 
     private Fragment activeFragment;
+    private FirebaseAuth mAuth;
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
@@ -34,6 +37,7 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
         setContentView(R.layout.activity_front_page);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         initializeFragments();
+        mAuth = FirebaseAuth.getInstance();
         navView.setOnNavigationItemSelectedListener(this);
         loadFragments();
     }
@@ -76,10 +80,14 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
                 activeFragment = profileFragment;
                 return true;
             case R.id.navigation_logout:
-                //add logout from firebase
-                Intent intent = new Intent(FrontPageActivity.this, LoginActivity.class);
-                startActivity(intent);
-                activeFragment = logoutFragment;
+                FirebaseUser user = mAuth.getCurrentUser();
+                if(user !=null)
+                {
+                    mAuth.signOut();
+                    Intent intent = new Intent(FrontPageActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    activeFragment = logoutFragment;
+                }
                 return true;
 
         }

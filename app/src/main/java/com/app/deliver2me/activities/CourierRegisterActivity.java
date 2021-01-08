@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.deliver2me.R;
@@ -19,16 +19,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-
-import static com.app.deliver2me.helpers.FirebaseHelper.couriersDatabase;
-import static com.app.deliver2me.helpers.FirebaseHelper.usersDatabase;
-
-public class RegisterActivity extends AppCompatActivity {
+public class CourierRegisterActivity extends AppCompatActivity {
 
     private TextInputEditText firstNameEdit;
     private TextInputEditText lastNameEdit;
@@ -39,13 +31,14 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_courier_register);
+        mAuth = FirebaseAuth.getInstance();
         initializeViews();
         setOnClickListeners();
-        mAuth = FirebaseAuth.getInstance();
     }
 
     private void setOnClickListeners() {
@@ -59,25 +52,24 @@ public class RegisterActivity extends AppCompatActivity {
                 final String confirmPassword = confirmPassEdit.getText().toString();
                 if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty())
                 {
-                    Toast.makeText(RegisterActivity.this,"Nu ați completat toate datele, încercați din nou",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CourierRegisterActivity.this,"Nu ați completat toate datele, încercați din nou",Toast.LENGTH_SHORT).show();
 
                 }
                 else{
                     if(!password.equals(confirmPassword))
                     {
-                        Toast.makeText(RegisterActivity.this, "Parolele nu se potrivesc", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CourierRegisterActivity.this, "Parolele nu se potrivesc", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
-                            createUser(firstName,lastName,email,password);
+                        createCourier(firstName,lastName,email,password);
                     }
                 }
             }
         });
     }
 
-
-    private void createUser(String firstName, String lastName, String email, String password) {
+    private void createCourier(String firstName, String lastName, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -87,23 +79,24 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if(user == null)
                             {
-                                return ;
+                                return;
                             }
                             User userModel = new User(firstName,lastName,email,password);
-                            usersDatabase.child(user.getUid()).setValue(userModel);
-                            Toast.makeText(RegisterActivity.this, "Înregistrat cu succes", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            FirebaseHelper.couriersDatabase.child(user.getUid()).setValue(userModel);
+                            Toast.makeText(CourierRegisterActivity.this, "Înregistrat cu succes", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(CourierRegisterActivity.this, CourierLoginActivity.class);
                             intent.putExtra("email",email);
                             intent.putExtra("password",password);
                             startActivity(intent);
                         }
-                        else {
+                        else
+                        {
                             if(mAuth.getCurrentUser().getEmail().equals(email))
                             {
-                                Toast.makeText(RegisterActivity.this, "Acest email este deja folosit", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CourierRegisterActivity.this, "Acest email este deja folosit", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                            Toast.makeText(RegisterActivity.this, "Hopa! Înregistrarea a eșuat. Verifică conexiunea la internet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CourierRegisterActivity.this, "Hopa! Înregistrarea a eșuat. Verifică conexiunea la internet", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -117,8 +110,6 @@ public class RegisterActivity extends AppCompatActivity {
         passEdit = findViewById(R.id.register_passwordEdit);
         confirmPassEdit = findViewById(R.id.register_confirmPasswordEdit);
 
-        registerButton = findViewById(R.id.registerButton);
+        registerButton = findViewById(R.id.courierRegisterButton);
     }
-
-
 }
