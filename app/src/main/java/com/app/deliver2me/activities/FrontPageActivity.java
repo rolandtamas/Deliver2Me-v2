@@ -46,7 +46,8 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment,"1").commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, dashboardFragment,"2").hide(dashboardFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, notificationsFragment,"3").hide(notificationsFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, logoutFragment,"4").hide(notificationsFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, profileFragment,"4").hide(profileFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, logoutFragment,"5").hide(notificationsFragment).commit();
     }
 
     private void initializeFragments() {

@@ -3,9 +3,11 @@ package com.app.deliver2me.holders;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class MyEntryViewHolder extends RecyclerView.ViewHolder {
     private TextView title;
     private TextView author;
     private ImageButton deleteButton;
+    private ImageView userImage;
     private FirebaseAuth mAuth;
 
 
@@ -47,9 +50,6 @@ public class MyEntryViewHolder extends RecyclerView.ViewHolder {
                 new AlertDialog.Builder(itemView.getContext())
                         .setTitle("Stergere intrare")
                         .setMessage("Sunteti sigur ca doriti sa stergeti intrarea?")
-
-                        // Specifying a listener allows you to take an action before dismissing the dialog.
-                        // The dialog is automatically dismissed when a dialog button is clicked.
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 adsDatabase.child(title.getText().toString()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -83,6 +83,7 @@ public class MyEntryViewHolder extends RecyclerView.ViewHolder {
         title = itemView.findViewById(R.id.my_row_entry_title);
         author = itemView.findViewById(R.id.my_row_entry_author);
         deleteButton = itemView.findViewById(R.id.my_row_delete);
+        userImage = itemView.findViewById(R.id.userImage);
     }
 
     public void setValues(String title, String author)

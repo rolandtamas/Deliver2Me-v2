@@ -58,7 +58,7 @@ public class NewEntryActivity extends AppCompatActivity {
                             User model = snapshot.getValue(User.class); //
                             if(model !=null)
                             {author = model.getFirstName() + " " +model.getLastName();}
-                            adsDatabase.child(title).setValue(new EntryViewModel(title,description,author));
+                            adsDatabase.child(title).setValue(new EntryViewModel(title,description,author,model.getImageUri()));
                             Toast.makeText(NewEntryActivity.this, "Anuntul a fost adaugat cu succes", Toast.LENGTH_SHORT).show();
 
                         new Handler().postDelayed(new Runnable() {

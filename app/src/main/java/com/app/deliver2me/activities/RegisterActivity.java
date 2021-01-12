@@ -25,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-import static com.app.deliver2me.helpers.FirebaseHelper.couriersDatabase;
 import static com.app.deliver2me.helpers.FirebaseHelper.usersDatabase;
 
 public class RegisterActivity extends AppCompatActivity {

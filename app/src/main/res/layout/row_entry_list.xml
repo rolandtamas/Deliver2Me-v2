@@ -5,7 +5,12 @@
     android:layout_margin="10dp"
     android:orientation="vertical"
     android:background="@android:color/holo_orange_dark">
-
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:id="@+id/userImage"
+        android:src="@drawable/ic_baseline_account_circle_24"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

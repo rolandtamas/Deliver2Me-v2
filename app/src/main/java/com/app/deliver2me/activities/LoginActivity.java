@@ -33,8 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox rememberMeCheck;
     private Button loginButton;
     private Button registerButton;
-    private Button courierRegisterButton;
-    private TextView switchAccount;
     private FirebaseAuth mAuth;
 
     private String email;
@@ -48,14 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         setOnClickListeners();
         mAuth = FirebaseAuth.getInstance();
         Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        if(b!=null)
-        {
-            String emailFromReg = (String)b.get("email");
-            String passwordFromReg = (String)b.get("password");
-            emailField.setText(emailFromReg);
-            passField.setText(passwordFromReg);
-        }
+        emailField.setText(intent.getStringExtra("email"));
+        passField.setText(intent.getStringExtra("password"));
         populateInputFields();
     }
 
@@ -85,9 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         rememberMeCheck = findViewById(R.id.rememberMeCheckBox);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
-        courierRegisterButton = findViewById(R.id.courierRegisterButton);
 
-        switchAccount = findViewById(R.id.switch_account);
     }
 
     private void setOnClickListeners()
@@ -122,20 +112,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        courierRegisterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, CourierRegisterActivity.class));
-            }
-        });
-
-        switchAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, CourierLoginActivity.class));
             }
         });
 
