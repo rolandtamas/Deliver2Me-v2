@@ -76,6 +76,18 @@
             android:id="@+id/registerButton"
             android:text="Înregistrează-te"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="22dp">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgotPassButton"
+            android:text="Am uitat parola..."/>
+
+    </LinearLayout>
     
 
 </LinearLayout>

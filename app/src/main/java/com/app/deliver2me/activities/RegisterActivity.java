@@ -23,6 +23,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 
 import static com.app.deliver2me.helpers.FirebaseHelper.usersDatabase;
@@ -88,13 +90,21 @@ public class RegisterActivity extends AppCompatActivity {
                             {
                                 return ;
                             }
-                            User userModel = new User(firstName,lastName,email,password);
-                            usersDatabase.child(user.getUid()).setValue(userModel);
-                            Toast.makeText(RegisterActivity.this, "Înregistrat cu succes", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            intent.putExtra("email",email);
-                            intent.putExtra("password",password);
-                            startActivity(intent);
+                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        User userModel = new User(firstName,lastName,email,password);
+                                        usersDatabase.child(user.getUid()).setValue(userModel);
+                                        Toast.makeText(RegisterActivity.this, "Înregistrat cu succes. Va rugam sa va verificati adresa de e-mail", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        intent.putExtra("email",email);
+                                        intent.putExtra("password",password);
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
                         }
                         else {
                             if(mAuth.getCurrentUser().getEmail().equals(email))

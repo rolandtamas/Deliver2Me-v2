@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox rememberMeCheck;
     private Button loginButton;
     private Button registerButton;
+    private Button forgotPasswordButton;
     private FirebaseAuth mAuth;
 
     private String email;
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         rememberMeCheck = findViewById(R.id.rememberMeCheckBox);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
+        forgotPasswordButton = findViewById(R.id.forgotPassButton);
 
     }
 
@@ -115,6 +117,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
     }
 
     private void doLogin() {
@@ -132,22 +141,29 @@ public class LoginActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                FirebaseHelper.usersDatabase.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        User userModel = snapshot.getValue(User.class);
-                                        StorageHelper.getInstance().setUserModel(userModel);
-                                        startActivity(new Intent(LoginActivity.this,FrontPageActivity.class));
-                                    }
+                                if(user.isEmailVerified())
+                                {
+                                    FirebaseHelper.usersDatabase.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            User userModel = snapshot.getValue(User.class);
+                                            StorageHelper.getInstance().setUserModel(userModel);
+                                            startActivity(new Intent(LoginActivity.this,FrontPageActivity.class));
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    Toast.makeText(LoginActivity.this, "Conectare eșuată. Încercați din nou sau verificati-va e-mail-ul", Toast.LENGTH_SHORT).show();
+                                }
                             }
                             else{
-                                Toast.makeText(LoginActivity.this, "Conectare eșuată. Încercați din nou", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Conectare eșuată. Încercați din nou sau verificati-va e-mail-ul", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
