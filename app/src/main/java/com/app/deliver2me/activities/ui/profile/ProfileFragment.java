@@ -101,7 +101,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openFileChooser();
-
             }
         });
 
@@ -145,8 +144,6 @@ public class ProfileFragment extends Fragment {
                             });
 
                 }
-
-
 
                 new Handler().postDelayed(new Runnable() {
                     @Override

@@ -6,37 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".activities.NewEntryActivity"
     android:orientation="vertical"
-    android:gravity="top">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:id="@+id/adtitle"
-            android:hint="Titlul anuntului"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_margin="10dp"
-            android:id="@+id/addescription"
-            android:hint="Descriere"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
+    android:gravity="center">
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adauga anunt"
-        android:id="@+id/addNewAd"
-        android:layout_margin="25dp"/>
+        android:textSize="30sp"
+        android:text="Anunt nou"
+        android:layout_margin="10dp"/>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/orange">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/adtitle"
+                android:hint="Titlul anuntului"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/addescription"
+                android:hint="Descriere"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adauga anunt"
+            android:id="@+id/addNewAd"
+            android:layout_marginTop="400dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            app:cornerRadius="20dp"/>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

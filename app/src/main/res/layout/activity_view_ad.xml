@@ -1,59 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ViewAdActivity"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/ad_title"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/orange">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ad_title"
-        android:layout_marginBottom="-58dp"
-        android:id="@id/ad_author"
-        android:layout_marginStart="20dp"/>
-
-    <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_below="@+id/ad_author"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="74dp"
-        android:gravity="center"
-        android:id="@+id/textArea"
-        >
         <TextView
-            android:id="@+id/ad_content"
-            android:layout_width="match_parent"
+            android:id="@+id/ad_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:gravity="top|left"
-            android:inputType="textMultiLine"
-            android:overScrollMode="always"
-            android:scrollbarStyle="insideInset"
-            android:scrollbars="vertical"
-            android:lines="6"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:scrollHorizontally="false"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"/>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ad_title"
+            android:id="@+id/ad_author"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/sendOrderButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textArea"
-        android:layout_marginTop="104dp"
-        android:layout_marginStart="120dp"
-        android:text="Preia Comanda"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="74dp"
+            android:gravity="center"
+            android:id="@+id/textArea">
+            <TextView
+                android:id="@+id/ad_content"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:lines="6"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:scrollHorizontally="false"/>
 
-</RelativeLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sendOrderButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textArea"
+            android:layout_marginTop="304dp"
+            android:layout_marginStart="120dp"
+            android:text="Preia Comanda"
+            app:cornerRadius="20dp"/>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</LinearLayout>

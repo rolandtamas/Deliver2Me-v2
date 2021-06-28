@@ -120,7 +120,9 @@ public class LoginActivity extends AppCompatActivity {
         forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                intent.putExtra("resetEmail", email);
+                startActivity(intent);
             }
         });
 
@@ -148,7 +150,9 @@ public class LoginActivity extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             User userModel = snapshot.getValue(User.class);
                                             StorageHelper.getInstance().setUserModel(userModel);
-                                            startActivity(new Intent(LoginActivity.this,FrontPageActivity.class));
+                                            Intent intent = new Intent(LoginActivity.this,FrontPageActivity.class);
+                                            intent.putExtra("possibleNewPass",password);
+                                            startActivity(intent);
                                         }
 
                                         @Override

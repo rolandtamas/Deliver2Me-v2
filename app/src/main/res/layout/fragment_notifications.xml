@@ -7,10 +7,15 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".activities.ui.notifications.NotificationsFragment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Notificari"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="550dp"
         android:layout_margin="10dp">
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

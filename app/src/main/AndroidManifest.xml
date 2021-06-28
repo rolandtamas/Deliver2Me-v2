@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Deliver2Me">
-        <activity android:name=".activities.ForgotPasswordActivity"></activity>
+        <activity android:name=".activities.ResetPasswordActivity"></activity>
+        <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.OnBoardingActivity" />
         <activity android:name=".activities.ViewAdActivity" />
         <activity android:name=".activities.NewEntryActivity" />

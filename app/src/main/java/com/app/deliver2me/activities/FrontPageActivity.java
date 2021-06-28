@@ -10,6 +10,9 @@ import com.app.deliver2me.activities.ui.home.HomeFragment;
 import com.app.deliver2me.activities.ui.logout.LogoutFragment;
 import com.app.deliver2me.activities.ui.notifications.NotificationsFragment;
 import com.app.deliver2me.activities.ui.profile.ProfileFragment;
+import com.app.deliver2me.helpers.FirebaseHelper;
+import com.app.deliver2me.helpers.StorageHelper;
+import com.app.deliver2me.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,7 +42,34 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
         initializeFragments();
         mAuth = FirebaseAuth.getInstance();
         navView.setOnNavigationItemSelectedListener(this);
+        checkIfUserRecentlyChangedPassword();
         loadFragments();
+    }
+
+    private void checkIfUserRecentlyChangedPassword() {
+        User oldUserCredentials = StorageHelper.getInstance().getUserModel();
+        if(oldUserCredentials == null)
+        {
+            return;
+        }
+        Intent intent = getIntent();
+        String possibleNewPass = intent.getStringExtra("possibleNewPass");
+        if((!oldUserCredentials.getPassword().equals(possibleNewPass)) && oldUserCredentials.getImageUri() != null)
+        {
+            User newUserCredentials = new User(oldUserCredentials.getFirstName(), oldUserCredentials.getLastName(), oldUserCredentials.getEmail(), possibleNewPass, oldUserCredentials.getImageUri());
+            StorageHelper.getInstance().setUserModel(newUserCredentials);
+            FirebaseHelper.usersDatabase.child(mAuth.getCurrentUser().getUid()).setValue(newUserCredentials);
+        }
+        else if(!oldUserCredentials.getPassword().equals(possibleNewPass))
+        {
+            User newUserCredentials = new User(oldUserCredentials.getFirstName(), oldUserCredentials.getLastName(), oldUserCredentials.getEmail(), possibleNewPass);
+            StorageHelper.getInstance().setUserModel(newUserCredentials);
+            FirebaseHelper.usersDatabase.child(mAuth.getCurrentUser().getUid()).setValue(newUserCredentials);
+        }
+        else
+        {
+            return;
+        }
     }
 
     private void loadFragments() {
