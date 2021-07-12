@@ -1,5 +1,7 @@
 package com.app.deliver2me.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -54,17 +56,24 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
         }
         Intent intent = getIntent();
         String possibleNewPass = intent.getStringExtra("possibleNewPass");
-        if((!oldUserCredentials.getPassword().equals(possibleNewPass)) && oldUserCredentials.getImageUri() != null)
+        if(possibleNewPass != null)
         {
-            User newUserCredentials = new User(oldUserCredentials.getFirstName(), oldUserCredentials.getLastName(), oldUserCredentials.getEmail(), possibleNewPass, oldUserCredentials.getImageUri());
-            StorageHelper.getInstance().setUserModel(newUserCredentials);
-            FirebaseHelper.usersDatabase.child(mAuth.getCurrentUser().getUid()).setValue(newUserCredentials);
-        }
-        else if(!oldUserCredentials.getPassword().equals(possibleNewPass))
-        {
-            User newUserCredentials = new User(oldUserCredentials.getFirstName(), oldUserCredentials.getLastName(), oldUserCredentials.getEmail(), possibleNewPass);
-            StorageHelper.getInstance().setUserModel(newUserCredentials);
-            FirebaseHelper.usersDatabase.child(mAuth.getCurrentUser().getUid()).setValue(newUserCredentials);
+            if((!oldUserCredentials.getPassword().equals(possibleNewPass)) && oldUserCredentials.getImageUri() != null)
+            {
+                User newUserCredentials = new User(oldUserCredentials.getFirstName(), oldUserCredentials.getLastName(), oldUserCredentials.getEmail(), possibleNewPass, oldUserCredentials.getImageUri());
+                StorageHelper.getInstance().setUserModel(newUserCredentials);
+                FirebaseHelper.usersDatabase.child(mAuth.getCurrentUser().getUid()).setValue(newUserCredentials);
+            }
+            else if(!oldUserCredentials.getPassword().equals(possibleNewPass))
+            {
+                User newUserCredentials = new User(oldUserCredentials.getFirstName(), oldUserCredentials.getLastName(), oldUserCredentials.getEmail(), possibleNewPass);
+                StorageHelper.getInstance().setUserModel(newUserCredentials);
+                FirebaseHelper.usersDatabase.child(mAuth.getCurrentUser().getUid()).setValue(newUserCredentials);
+            }
+            else
+            {
+                return ;
+            }
         }
         else
         {
@@ -77,7 +86,7 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, dashboardFragment,"2").hide(dashboardFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, notificationsFragment,"3").hide(notificationsFragment).commit();
         fragmentManager.beginTransaction().add(R.id.nav_host_fragment, profileFragment,"4").hide(profileFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, logoutFragment,"5").hide(notificationsFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, logoutFragment,"5").hide(logoutFragment).commit();
     }
 
     private void initializeFragments() {
@@ -114,10 +123,25 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user !=null)
                 {
-                    mAuth.signOut();
-                    Intent intent = new Intent(FrontPageActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    activeFragment = logoutFragment;
+                    new AlertDialog.Builder(this)
+                            .setTitle("Delogare")
+                            .setMessage("Sunteti sigur ca doriti sa va delogati?")
+                            .setPositiveButton(R.string.Da, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mAuth.signOut();
+                                    Intent intent = new Intent(FrontPageActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton(R.string.Nu, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
                 }
                 return true;
 

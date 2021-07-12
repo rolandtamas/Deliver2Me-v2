@@ -18,6 +18,7 @@ import com.app.deliver2me.R;
 import com.app.deliver2me.activities.FrontPageActivity;
 import com.app.deliver2me.activities.NewEntryActivity;
 import com.app.deliver2me.helpers.FirebaseHelper;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +51,7 @@ public class MyEntryViewHolder extends RecyclerView.ViewHolder {
                 new AlertDialog.Builder(itemView.getContext())
                         .setTitle("Stergere intrare")
                         .setMessage("Sunteti sigur ca doriti sa stergeti intrarea?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.Da, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 adsDatabase.child(title.getText().toString()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -72,7 +73,7 @@ public class MyEntryViewHolder extends RecyclerView.ViewHolder {
                         })
 
                         // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setNegativeButton(android.R.string.no, null)
+                        .setNegativeButton(R.string.Nu, null)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             }
@@ -90,6 +91,13 @@ public class MyEntryViewHolder extends RecyclerView.ViewHolder {
     {
         this.title.setText(title);
         this.author.setText(author);
+    }
+
+    public void setValues(String title, String author, String imageUri)
+    {
+        this.title.setText(title);
+        this.author.setText(author);
+        Glide.with(itemView.getContext()).load(imageUri).into(userImage);
     }
 
 }

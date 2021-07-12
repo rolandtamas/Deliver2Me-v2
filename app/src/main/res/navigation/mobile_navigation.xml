@@ -24,12 +24,12 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_logout"
-        android:name="com.app.deliver2me.activities.ui.notifications.NotificationsFragment"
+        android:name="com.app.deliver2me.activities.ui.logout.LogoutFragment"
         android:label="Logout"
         tools:layout="@layout/fragment_logout" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.app.deliver2me.activities.ui.notifications.NotificationsFragment"
+        android:name="com.app.deliver2me.activities.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

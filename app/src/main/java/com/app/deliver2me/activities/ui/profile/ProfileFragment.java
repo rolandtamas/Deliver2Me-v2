@@ -1,5 +1,6 @@
 package com.app.deliver2me.activities.ui.profile;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.UriPermission;
@@ -35,8 +36,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.mikhaellopez.circularimageview.CircularImageView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -49,7 +54,7 @@ public class ProfileFragment extends Fragment {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
-    private ImageView userPicture;
+    private CircularImageView userPicture;
     private TextView userName;
     private EditText firstName;
     private EditText lastName;
@@ -89,7 +94,7 @@ public class ProfileFragment extends Fragment {
         }
         else
         {
-            userPicture.setImageURI(Uri.parse(StorageHelper.getInstance().getUserModel().getImageUri()));
+            Glide.with(this.getContext()).load(StorageHelper.getInstance().getUserModel().getImageUri()).into(userPicture);
         }
         userName.setText(StorageHelper.getInstance().getUserModel().getFirstName() + " " +StorageHelper.getInstance().getUserModel().getLastName());
         firstName.setText(StorageHelper.getInstance().getUserModel().getFirstName());
@@ -109,9 +114,25 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 if(imageUri !=null)
                 {
+                    final ProgressDialog pd = new ProgressDialog(getContext());
+                    pd.setTitle("Incarcare poza");
+                    pd.show();
                     StorageReference imageRef = mStorageRef.child(imageUri.toString());
 
                     UploadTask uploadTask = imageRef.putFile(imageUri);
+                    uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull @NotNull UploadTask.TaskSnapshot snapshot) {
+                            double percentage = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            pd.setMessage((int)percentage + "%");
+                        }
+                    })
+                            .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
+                                    pd.dismiss();
+                                }
+                            });
 
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
@@ -134,7 +155,6 @@ public class ProfileFragment extends Fragment {
                                         StorageHelper.getInstance().setUserModel(newUserCredentials);
                                         usersDatabase.child(user.getUid()).setValue(newUserCredentials);
                                         Toast.makeText(root.getContext(), "Modificarile au fost salvate", Toast.LENGTH_SHORT).show();
-
                                     }
 
                                     else {
@@ -142,16 +162,20 @@ public class ProfileFragment extends Fragment {
                                     }
                                 }
                             });
-
                 }
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(root.getContext(), FrontPageActivity.class);
-                        startActivity(intent);
+                else
+                {
+                    User oldUser = StorageHelper.getInstance().getUserModel();
+                    if(oldUser.getImageUri()!=null)
+                    {
+                        user.updateEmail(email.getText().toString());
+                        User newUserCredentials = new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString(),oldUser.getImageUri());
+                        StorageHelper.getInstance().setUserModel(newUserCredentials);
+                        usersDatabase.child(user.getUid()).setValue(newUserCredentials);
+                        Toast.makeText(root.getContext(), "Modificarile au fost salvate", Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                }
             }
         });
 

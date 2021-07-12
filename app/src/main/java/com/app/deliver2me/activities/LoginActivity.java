@@ -46,6 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         initializeViews();
         setOnClickListeners();
         mAuth = FirebaseAuth.getInstance();
+//        if(mAuth.getCurrentUser() != null)
+//        {
+//            Intent intent = new Intent(LoginActivity.this, FrontPageActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
         Intent intent = getIntent();
         emailField.setText(intent.getStringExtra("email"));
         passField.setText(intent.getStringExtra("password"));
@@ -60,17 +66,6 @@ public class LoginActivity extends AppCompatActivity {
         emailField.setText(email);
         passField.setText(password);
     }
-
-    /*@Override
-    protected void onResume(){
-        super.onResume();
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null)
-        {
-            startActivity(new Intent(LoginActivity.this, FrontPageActivity.class));
-        }
-    }*/
 
     private void initializeViews() {
         emailField = findViewById(R.id.login_emailEdit);
