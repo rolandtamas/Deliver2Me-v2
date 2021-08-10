@@ -7,12 +7,13 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".activities.ui.profile.ProfileFragment">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="Profilul meu"
-            android:textSize="55sp"
-            android:layout_margin="10dp"/>
+            android:textSize="55sp" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="340dp"

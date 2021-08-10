@@ -48,6 +48,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryViewHolder> {
                 intent.putExtra("Author", entryViewModel.getAuthor());
                 intent.putExtra("Content", entryViewModel.getContent());
                 intent.putExtra("Address", entryViewModel.getAddress());
+                intent.putExtra("phoneNo", entryViewModel.getPhoneNo());
                 holder.itemView.getContext().startActivity(intent);
             }
         });

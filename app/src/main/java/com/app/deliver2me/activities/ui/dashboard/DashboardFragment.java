@@ -85,10 +85,6 @@ public class DashboardFragment extends Fragment {
         addFab.setOnClickListener(v -> {
             startActivity(new Intent(root.getContext(), NewEntryActivity.class));
         });
-
-
-
-
         return root;
     }
 

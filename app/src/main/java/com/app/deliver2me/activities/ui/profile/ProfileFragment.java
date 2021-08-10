@@ -112,6 +112,7 @@ public class ProfileFragment extends Fragment {
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                User oldUser = StorageHelper.getInstance().getUserModel();
                 if(imageUri !=null)
                 {
                     final ProgressDialog pd = new ProgressDialog(getContext());
@@ -151,7 +152,7 @@ public class ProfileFragment extends Fragment {
                                         Uri downloadUri = task.getResult();
                                         String downloadUrl = downloadUri.toString();
                                         user.updateEmail(email.getText().toString());
-                                        User newUserCredentials = new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString(),downloadUrl);
+                                        User newUserCredentials = new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString(),downloadUrl,oldUser.getCourier());
                                         StorageHelper.getInstance().setUserModel(newUserCredentials);
                                         usersDatabase.child(user.getUid()).setValue(newUserCredentials);
                                         Toast.makeText(root.getContext(), "Modificarile au fost salvate", Toast.LENGTH_SHORT).show();
@@ -166,11 +167,10 @@ public class ProfileFragment extends Fragment {
 
                 else
                 {
-                    User oldUser = StorageHelper.getInstance().getUserModel();
                     if(oldUser.getImageUri()!=null)
                     {
                         user.updateEmail(email.getText().toString());
-                        User newUserCredentials = new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString(),oldUser.getImageUri());
+                        User newUserCredentials = new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString(),oldUser.getImageUri(), oldUser.getCourier());
                         StorageHelper.getInstance().setUserModel(newUserCredentials);
                         usersDatabase.child(user.getUid()).setValue(newUserCredentials);
                         Toast.makeText(root.getContext(), "Modificarile au fost salvate", Toast.LENGTH_SHORT).show();

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -15,16 +16,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Deliver2Me">
-        <activity android:name=".activities.MapActivity"></activity>
+        <activity android:name=".activities.CourierFrontPageActivity"></activity>
+        <activity android:name=".activities.MapActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/favicon"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="channel_id"/>
 
         <activity android:name=".activities.ResetPasswordActivity" />
         <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.OnBoardingActivity" />
-        <activity android:name=".activities.ViewAdActivity" />
+        <activity
+            android:name=".activities.ViewAdActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".activities.NewEntryActivity" />
         <activity
             android:name=".activities.FrontPageActivity"
@@ -39,11 +49,15 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.TakeOrderService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+    <service
+        android:name=".services.TakeOrderService"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+        </intent-filter>
+    </service>
+
+
     </application>
 
 </manifest>

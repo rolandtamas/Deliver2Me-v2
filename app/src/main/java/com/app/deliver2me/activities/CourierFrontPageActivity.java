@@ -1,5 +1,10 @@
 package com.app.deliver2me.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,11 +12,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.app.deliver2me.R;
-import com.app.deliver2me.activities.ui.dashboard.DashboardFragment;
-import com.app.deliver2me.activities.ui.home.HomeFragment;
-import com.app.deliver2me.activities.ui.logout.LogoutFragment;
-import com.app.deliver2me.activities.ui.notifications.NotificationsFragment;
-import com.app.deliver2me.activities.ui.profile.ProfileFragment;
+import com.app.deliver2me.activities.ui.dashboard.CourierDashboardFragment;
+import com.app.deliver2me.activities.ui.home.CourierHomeFragment;
+import com.app.deliver2me.activities.ui.logout.CourierLogoutFragment;
+import com.app.deliver2me.activities.ui.profile.CourierProfileFragment;
 import com.app.deliver2me.helpers.FirebaseHelper;
 import com.app.deliver2me.helpers.StorageHelper;
 import com.app.deliver2me.models.User;
@@ -19,18 +23,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import org.jetbrains.annotations.NotNull;
 
-public class FrontPageActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class CourierFrontPageActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private HomeFragment homeFragment;
-    private DashboardFragment dashboardFragment;
-    private NotificationsFragment notificationsFragment;
-    private LogoutFragment logoutFragment;
-    private ProfileFragment profileFragment;
+    private CourierDashboardFragment courierDashboardFragment;
+    private CourierHomeFragment courierHomeFragment;
+    private CourierLogoutFragment courierLogoutFragment;
+    private CourierProfileFragment courierProfileFragment;
 
     private Fragment activeFragment;
     private FirebaseAuth mAuth;
@@ -39,11 +39,11 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_front_page);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        setContentView(R.layout.activity_courier_front_page);
+        BottomNavigationView navigationView = findViewById(R.id.courier_nav_view);
         initializeFragments();
         mAuth = FirebaseAuth.getInstance();
-        navView.setOnNavigationItemSelectedListener(this);
+        navigationView.setOnNavigationItemSelectedListener(this);
         checkIfUserRecentlyChangedPassword();
         loadFragments();
     }
@@ -77,51 +77,45 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
         }
         else
         {
-            return;
+            return ;
         }
     }
 
     private void loadFragments() {
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment,"1").commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, dashboardFragment,"2").hide(dashboardFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, notificationsFragment,"3").hide(notificationsFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, profileFragment,"4").hide(profileFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.nav_host_fragment, logoutFragment,"5").hide(logoutFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.courier_nav_host_fragment, courierHomeFragment,"1").commit();
+        fragmentManager.beginTransaction().add(R.id.courier_nav_host_fragment, courierDashboardFragment,"2").hide(courierDashboardFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.courier_nav_host_fragment, courierProfileFragment,"3").hide(courierProfileFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.courier_nav_host_fragment, courierLogoutFragment,"4").hide(courierLogoutFragment).commit();
     }
 
     private void initializeFragments() {
-        homeFragment = new HomeFragment();
-        dashboardFragment = new DashboardFragment();
-        notificationsFragment = new NotificationsFragment();
-        logoutFragment = new LogoutFragment();
-        profileFragment = new ProfileFragment();
+        courierDashboardFragment = new CourierDashboardFragment();
+        courierHomeFragment = new CourierHomeFragment();
+        courierLogoutFragment = new CourierLogoutFragment();
+        courierProfileFragment = new CourierProfileFragment();
 
-        activeFragment = homeFragment;
+        activeFragment = courierHomeFragment;
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId())
+    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+        switch (item.getItemId())
         {
-            case R.id.navigation_home:
-                fragmentManager.beginTransaction().hide(activeFragment).show(homeFragment).commit();
-                activeFragment = homeFragment;
+            case R.id.courier_navigation_home:
+                fragmentManager.beginTransaction().hide(activeFragment).show(courierHomeFragment).commit();
+                activeFragment = courierHomeFragment;
                 return true;
-            case R.id.navigation_dashboard:
-                fragmentManager.beginTransaction().hide(activeFragment).show(dashboardFragment).commit();
-                activeFragment = dashboardFragment;
+            case R.id.courier_navigation_dashboard:
+                fragmentManager.beginTransaction().hide(activeFragment).show(courierDashboardFragment).commit();
+                activeFragment = courierDashboardFragment;
                 return true;
-            case R.id.navigation_notifications:
-                fragmentManager.beginTransaction().hide(activeFragment).show(notificationsFragment).commit();
-                activeFragment = notificationsFragment;
+            case R.id.courier_navigation_profile:
+                fragmentManager.beginTransaction().hide(activeFragment).show(courierProfileFragment).commit();
+                activeFragment = courierProfileFragment;
                 return true;
-            case R.id.navigation_profile:
-                fragmentManager.beginTransaction().hide(activeFragment).show(profileFragment).commit();
-                activeFragment = profileFragment;
-                return true;
-            case R.id.navigation_logout:
+            case R.id.courier_navigation_logout:
                 FirebaseUser user = mAuth.getCurrentUser();
-                if(user !=null)
+                if(user!=null)
                 {
                     new AlertDialog.Builder(this)
                             .setTitle("Delogare")
@@ -130,7 +124,7 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     mAuth.signOut();
-                                    Intent intent = new Intent(FrontPageActivity.this, LoginActivity.class);
+                                    Intent intent = new Intent(CourierFrontPageActivity.this, LoginActivity.class);
                                     startActivity(intent);
                                 }
                             })
@@ -144,7 +138,6 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
                             .show();
                 }
                 return true;
-
         }
         return false;
     }

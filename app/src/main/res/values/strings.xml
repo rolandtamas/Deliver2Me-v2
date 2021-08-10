@@ -6,4 +6,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="Da">Da</string>
     <string name="Nu">Nu</string>
+    <string-array name="status">
+        <item>In livrare</item>
+        <item>Livrata</item>
+        <item>Anulata</item>
+    </string-array>
 </resources>

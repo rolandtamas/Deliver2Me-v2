@@ -6,6 +6,24 @@ public class User {
     private String email;
     private String password;
     private String imageUri;
+    private Boolean isCourier;
+
+    public User(String firstName, String lastName, String email, String password, Boolean isCourier) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.isCourier = isCourier;
+    }
+
+    public User(String firstName, String lastName, String email, String password, String imageUri, Boolean isCourier) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.imageUri = imageUri;
+        this.isCourier = isCourier;
+    }
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -62,6 +80,14 @@ public class User {
 
     public void setImageUri(String imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public Boolean getCourier() {
+        return isCourier;
+    }
+
+    public void setCourier(Boolean courier) {
+        isCourier = courier;
     }
 }
 

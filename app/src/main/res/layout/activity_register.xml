@@ -14,10 +14,11 @@
         android:text="Utilizator"
         android:gravity="center"
         android:textSize="40dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
@@ -31,14 +32,14 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_firstNameEdit"
             android:hint="Nume" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
@@ -52,7 +53,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_lastNameEdit"
             android:hint="Prenume" />
@@ -60,7 +61,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         app:boxCornerRadiusBottomEnd="20dp"
@@ -73,7 +74,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_emailEdit"
             android:hint="E-mail"
@@ -81,7 +82,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         app:endIconMode="password_toggle"
@@ -89,13 +90,14 @@
         app:boxCornerRadiusBottomStart="20dp"
         app:boxCornerRadiusTopEnd="20dp"
         app:boxCornerRadiusTopStart="20dp"
+        android:id="@+id/passEditLayout"
         app:boxStrokeColor="@color/green"
         app:hintTextColor="@color/green"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_passwordEdit"
             android:hint="Parolă"
@@ -103,9 +105,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:id="@+id/confirmPassEditLayout"
         app:endIconMode="password_toggle"
         app:boxCornerRadiusBottomEnd="20dp"
         app:boxCornerRadiusBottomStart="20dp"
@@ -117,12 +120,17 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_confirmPasswordEdit"
             android:hint="Confirmă parola"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/isCourierSwitch"
+        android:text="Curier(implicit: utilizator)"/>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"

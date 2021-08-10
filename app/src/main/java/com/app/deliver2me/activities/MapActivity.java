@@ -50,7 +50,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private final int DEFAULT_ZOOM = 15;
     private Location location;
-    private String tempTitle, tempDesc;
+    private String tempTitle, tempDesc, tempPhoneNumber;
     private LatLng position;
 
     @Override
@@ -68,6 +68,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Intent intent = getIntent();
         tempTitle = intent.getStringExtra("Title");
         tempDesc = intent.getStringExtra("Description");
+        tempPhoneNumber = intent.getStringExtra("PhoneNumber");
     }
 
     private void setMapListeners() {
@@ -92,6 +93,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     intent.putExtra("Address", address);
                     intent.putExtra("Title", tempTitle);
                     intent.putExtra("Description", tempDesc);
+                    intent.putExtra("PhoneNumber", tempPhoneNumber);
                     PositionHelper.getInstance().setPosition(position);
                     startActivity(intent);
                 }

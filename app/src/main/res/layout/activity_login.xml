@@ -14,7 +14,7 @@
         android:src="@drawable/favicon"
         android:layout_marginBottom="15dp"/>
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:padding="8dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -28,7 +28,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_emailEdit"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="13dp"
@@ -36,7 +36,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="8dp"
@@ -52,7 +52,7 @@
         app:endIconMode="password_toggle">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="13dp"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/login_passwordEdit"
             android:layout_gravity="center"

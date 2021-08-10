@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +17,9 @@ import com.app.deliver2me.helpers.FirebaseHelper;
 import com.app.deliver2me.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,8 +38,14 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText firstNameEdit;
     private TextInputEditText lastNameEdit;
     private TextInputEditText emailEdit;
+
     private TextInputEditText passEdit;
+    private TextInputLayout passEditLayout;
+
     private TextInputEditText confirmPassEdit;
+    private TextInputLayout confirmPassEditLayout;
+
+    private SwitchMaterial isCourierSwitch;
 
     private Button registerButton;
     private FirebaseAuth mAuth;
@@ -46,7 +56,64 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         initializeViews();
         setOnClickListeners();
+        setPassFieldListener();
         mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void setPassFieldListener() {
+        passEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if(passEdit.getText().toString().length()<6)
+                {
+                    passEditLayout.setError("Parola prea scurta");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(passEdit.getText().toString().length()<6)
+                {
+                    passEditLayout.setError("Parola prea scurta");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(passEdit.getText().toString().length()>=6)
+                {
+                    passEditLayout.setError(null);
+                }
+            }
+        });
+
+        confirmPassEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if(!(passEdit.getText().toString().equals(confirmPassEdit.getText().toString())))
+                {
+                    confirmPassEditLayout.setError("Parolele nu se potrivesc");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!(passEdit.getText().toString().equals(confirmPassEdit.getText().toString())))
+                {
+                    confirmPassEditLayout.setError("Parolele nu se potrivesc");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(passEdit.getText().toString().equals(confirmPassEdit.getText().toString()))
+                {
+                    confirmPassEditLayout.setError(null);
+                }
+            }
+        });
+
     }
 
     private void setOnClickListeners() {
@@ -58,6 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String email = emailEdit.getText().toString();
                 final String password = passEdit.getText().toString();
                 final String confirmPassword = confirmPassEdit.getText().toString();
+                final boolean isCourier = isCourierSwitch.isChecked();
                 if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty())
                 {
                     Toast.makeText(RegisterActivity.this,"Nu ați completat toate datele, încercați din nou",Toast.LENGTH_SHORT).show();
@@ -70,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else
                     {
-                            createUser(firstName,lastName,email,password);
+                            createUser(firstName,lastName,email,password, isCourier);
                     }
                 }
             }
@@ -78,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void createUser(String firstName, String lastName, String email, String password) {
+    private void createUser(String firstName, String lastName, String email, String password, boolean isCourier) {
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -95,13 +163,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull @NotNull Task<Void> task) {
                                     if(task.isSuccessful())
                                     {
-                                        User userModel = new User(firstName,lastName,email,password);
-                                        usersDatabase.child(user.getUid()).setValue(userModel);
-                                        Toast.makeText(RegisterActivity.this, "Înregistrat cu succes. Va rugam sa va verificati adresa de e-mail", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                        intent.putExtra("email",email);
-                                        intent.putExtra("password",password);
-                                        startActivity(intent);
+                                            User courierModel = new User(firstName,lastName,email,password,isCourier);
+                                            usersDatabase.child(user.getUid()).setValue(courierModel);
+                                            Toast.makeText(RegisterActivity.this, "Înregistrat cu succes. Va rugam sa va verificati adresa de e-mail", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                            intent.putExtra("email",email);
+                                            intent.putExtra("password",password);
+                                            startActivity(intent);
                                     }
                                 }
                             });
@@ -123,8 +191,14 @@ public class RegisterActivity extends AppCompatActivity {
         firstNameEdit = findViewById(R.id.register_firstNameEdit);
         lastNameEdit = findViewById(R.id.register_lastNameEdit);
         emailEdit = findViewById(R.id.register_emailEdit);
+
         passEdit = findViewById(R.id.register_passwordEdit);
+        passEditLayout = findViewById(R.id.passEditLayout);
+        confirmPassEditLayout = findViewById(R.id.confirmPassEditLayout);
+
         confirmPassEdit = findViewById(R.id.register_confirmPasswordEdit);
+
+        isCourierSwitch = findViewById(R.id.isCourierSwitch);
 
         registerButton = findViewById(R.id.registerButton);
     }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MapActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="378dp"
+        android:layout_height="350dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="16dp" />
+
+    <ImageView
+        android:id="@+id/transparent_image"
+        android:layout_width="376dp"
+        android:layout_height="343dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="-3dp" />
+
+    <ImageView
+        android:layout_width="71dp"
+        android:layout_height="68dp"
+        android:layout_alignStart="@+id/map"
+        android:layout_alignTop="@+id/map"
+        android:layout_alignEnd="@+id/map"
+        android:layout_alignBottom="@+id/transparent_image"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="138dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="141dp"
+        android:src="@drawable/pin" />
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addressMap"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/confirmButtonMap"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/check"
+        app:iconGravity="textEnd"
+        app:iconSize="22dp" />
+
+</LinearLayout>

@@ -75,7 +75,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="500dp"
+                        android:layout_marginTop="540dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="20dp"
                         android:id="@+id/address"
@@ -83,11 +83,28 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="470dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/phoneNo"
+                        android:inputType="phone"
+                        android:hint="Numar telefon (07xx)"
+                        android:maxLength="10"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/checkMap"
                     android:layout_width="47dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="505dp"
+                    android:layout_marginTop="545dp"
                     android:layout_marginLeft="280dp"
                     android:src="@drawable/map"
                     app:cornerRadius="90dp"
@@ -98,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:text="Adauga anunt"
                     android:id="@+id/addNewAd"
-                    android:layout_marginTop="580dp"
+                    android:layout_marginTop="620dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
                     app:cornerRadius="20dp"/>

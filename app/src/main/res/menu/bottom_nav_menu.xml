@@ -25,6 +25,4 @@
         android:title="Delogare"
         android:id="@+id/navigation_logout"
         android:icon="@drawable/logout"/>
-
-
 </menu>

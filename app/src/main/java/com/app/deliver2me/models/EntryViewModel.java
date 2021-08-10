@@ -6,8 +6,26 @@ public class EntryViewModel {
     private String author;
     private String address;
     private String imageUri;
+    private String phoneNo;
 
-    public EntryViewModel(String title, String content, String author,String imageUri) {
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public EntryViewModel(String title, String content, String author, String address, String imageUri, String phoneNo) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.address = address;
+        this.imageUri = imageUri;
+        this.phoneNo = phoneNo;
+    }
+
+    public EntryViewModel(String title, String content, String author, String imageUri) {
         this.title = title;
         this.content = content;
         this.author = author;
