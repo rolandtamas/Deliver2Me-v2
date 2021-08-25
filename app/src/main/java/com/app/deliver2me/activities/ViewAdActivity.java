@@ -19,6 +19,7 @@ import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -295,6 +296,7 @@ public class ViewAdActivity extends AppCompatActivity implements OnMapReadyCallb
         title = findViewById(R.id.ad_title);
         author = findViewById(R.id.ad_author);
         content = findViewById(R.id.ad_content);
+        content.setMovementMethod(new ScrollingMovementMethod());
         address = findViewById(R.id.addressTextView);
         phone = findViewById(R.id.authorPhoneNumber);
         takeOrder = findViewById(R.id.sendOrderButton);

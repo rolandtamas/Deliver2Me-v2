@@ -114,6 +114,8 @@ public class CourierFrontPageActivity extends AppCompatActivity implements Botto
                 activeFragment = courierProfileFragment;
                 return true;
             case R.id.courier_navigation_logout:
+                fragmentManager.beginTransaction().hide(activeFragment).show(courierHomeFragment).commit();
+                activeFragment = courierHomeFragment;
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user!=null)
                 {

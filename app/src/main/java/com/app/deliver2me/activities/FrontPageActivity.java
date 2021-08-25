@@ -120,6 +120,8 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
                 activeFragment = profileFragment;
                 return true;
             case R.id.navigation_logout:
+                fragmentManager.beginTransaction().hide(activeFragment).show(homeFragment).commit();
+                activeFragment = homeFragment;
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user !=null)
                 {

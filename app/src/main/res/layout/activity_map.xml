@@ -61,11 +61,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/confirmButtonMap"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="66dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/green"
         app:icon="@drawable/check"
-        app:iconGravity="textEnd"
-        app:iconSize="22dp" />
+        app:iconSize="25dp" />
 
 </LinearLayout>

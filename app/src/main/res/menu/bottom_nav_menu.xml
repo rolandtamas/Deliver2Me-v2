@@ -12,11 +12,11 @@
         android:title="Anunțurile mele"
         android:titleCondensed="Anunțuri"/>
 
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/messages"
-        android:title="Mesajele mele"
-        android:titleCondensed="Mesaje"/>
+<!--    <item-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:icon="@drawable/messages"-->
+<!--        android:title="Mesajele mele"-->
+<!--        android:titleCondensed="Mesaje"/>-->
     <item
         android:title="Profilul meu"
         android:id="@+id/navigation_profile"

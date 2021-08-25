@@ -29,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,12 +58,14 @@ public class NewEntryActivity extends AppCompatActivity {
     private TextInputEditText descriptionField;
     private TextInputEditText addressField;
     private TextInputEditText phoneNumberField;
+    private MaterialCheckBox isUrgent;
     private FloatingActionButton mapFab;
     private NestedScrollView nestedScrollView;
     private Button addButton;
     private FirebaseAuth mAuth;
     private APIService apiService;
     private String author = "";
+    private String phoneNumberPattern = "(07([0-9]{8}))";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +82,12 @@ public class NewEntryActivity extends AppCompatActivity {
             String title = intent.getStringExtra("Title");
             String description = intent.getStringExtra("Description");
             String phoneNumber = intent.getStringExtra("PhoneNumber");
+            boolean isChecked = intent.getBooleanExtra("isChecked",false);
             addressField.setText(address);
             titleField.setText(title);
             descriptionField.setText(description);
             phoneNumberField.setText(phoneNumber);
+            isUrgent.setChecked(isChecked);
         }
 
         apiService = Client.getClient("https://fcm.googleapis.com").create(APIService.class);
@@ -103,6 +108,10 @@ public class NewEntryActivity extends AppCompatActivity {
                 {
                     Toast.makeText(NewEntryActivity.this, "Nu toate campurile sunt completate!", Toast.LENGTH_SHORT).show();
                 }
+                else if(!phoneNumber.matches(phoneNumberPattern))
+                {
+                    Toast.makeText(NewEntryActivity.this, "Numarul de telefon are format gresit. Va rugam introduceti din nou", Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
                     usersDatabase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -113,7 +122,15 @@ public class NewEntryActivity extends AppCompatActivity {
                             if(model !=null)
                             {
                                 author = model.getFirstName() + " " + model.getLastName();
-                                adsDatabase.child(title).setValue(new EntryViewModel(title, description, author,address, model.getImageUri(),phoneNumber));
+                                boolean isChecked = isUrgent.isChecked();
+                                if(isChecked)
+                                {
+                                    adsDatabase.child(title).setValue(new EntryViewModel(title, description, author,address, model.getImageUri(),phoneNumber, true));
+                                }
+                                else
+                                {
+                                    adsDatabase.child(title).setValue(new EntryViewModel(title, description, author,address, model.getImageUri(),phoneNumber));
+                                }
                                 Toast.makeText(NewEntryActivity.this, "Anuntul a fost adaugat cu succes", Toast.LENGTH_SHORT).show();
 
 //                                NotificationHelper.displayNotification(NewEntryActivity.this,"Anunt nou", author+" a postat un anunt nou: "+title);
@@ -182,11 +199,13 @@ public class NewEntryActivity extends AppCompatActivity {
                 String title = titleField.getText().toString();
                 String description = descriptionField.getText().toString();
                 String phoneNumber = phoneNumberField.getText().toString();
+                boolean isChecked = isUrgent.isChecked();
                 if(!(title.isEmpty() && description.isEmpty() && phoneNumber.isEmpty()))
                 {
                     intent.putExtra("Title",title);
                     intent.putExtra("Description", description);
                     intent.putExtra("PhoneNumber", phoneNumber);
+                    intent.putExtra("isChecked", isChecked);
                 }
                 startActivity(intent);
             }
@@ -201,5 +220,6 @@ public class NewEntryActivity extends AppCompatActivity {
         nestedScrollView = findViewById(R.id.nestedScrollView);
         mapFab = findViewById(R.id.checkMap);
         addressField = findViewById(R.id.address);
+        isUrgent = findViewById(R.id.isUrgent);
     }
 }

@@ -5,13 +5,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.ViewAdActivity">
-
-
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="350dp"
-        android:layout_height="600dp"
+        android:layout_width="325dp"
+        android:layout_height="650dp"
         android:id="@+id/mainForm"
-        app:cardBackgroundColor="@color/orange"
+        app:cardBackgroundColor="@color/browser_actions_bg_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -42,8 +40,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:textSize="13sp"
+                android:textSize="18sp"
                 android:textStyle="italic"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titleText" />
 
@@ -66,10 +65,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:textSize="13sp"
+                android:textSize="18sp"
                 android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/authorTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/authorTextView"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/phoneNumberText"
@@ -92,7 +92,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="168dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@id/phoneNumberText"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="44dp"
                 android:fontFamily="@font/baloo"
                 android:text="Descriere"
                 android:textSize="20sp"
@@ -132,29 +134,16 @@
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
                     android:scrollHorizontally="false"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/black" />
             </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:fontFamily="@font/baloo"
-                android:text="Adresa"
-                android:textSize="23sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/mapLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textArea" />
 
             <RelativeLayout
                 android:id="@+id/mapLayout"
                 android:layout_width="300dp"
                 android:layout_height="135dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="18dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textArea">
@@ -176,10 +165,10 @@
                 android:id="@+id/addressTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mapLayout" />
 
@@ -189,12 +178,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="15dp"
+                android:backgroundTint="@color/green"
                 android:text="Preia Comanda"
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addressTextView"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.6" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

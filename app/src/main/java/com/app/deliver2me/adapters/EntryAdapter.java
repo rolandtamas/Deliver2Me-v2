@@ -39,7 +39,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull EntryViewHolder holder, int position) {
         final EntryViewModel entryViewModel = entryViewModelList.get(position);
-        holder.setValues(entryViewModel.getTitle(), entryViewModel.getAuthor(), entryViewModel.getImageUri());
+        holder.setValues(entryViewModel.getTitle(), entryViewModel.getAuthor(), entryViewModel.getImageUri(), entryViewModel.getPriority());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

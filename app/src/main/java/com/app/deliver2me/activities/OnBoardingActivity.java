@@ -54,10 +54,10 @@ public class OnBoardingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        if(sharedPreferences.getBoolean(prevStarted, false))
+        if(!sharedPreferences.getBoolean(prevStarted, false))
         {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(prevStarted,Boolean.FALSE);
+            editor.putBoolean(prevStarted,Boolean.TRUE);
             editor.apply();
         }
         else

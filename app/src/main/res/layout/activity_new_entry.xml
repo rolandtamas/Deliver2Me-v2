@@ -25,7 +25,8 @@
                 android:layout_margin="10dp"
                 android:fontFamily="@font/baloo"
                 android:text="Anunt nou"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/black"/>
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="340dp"
                 android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_gravity="center"
                 app:cardCornerRadius="20dp"
-                app:cardBackgroundColor="@color/orange">
+                app:cardBackgroundColor="@color/browser_actions_bg_grey">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,10 +43,11 @@
                     android:text="Titlul anuntului"
                     android:layout_margin="18dp"
                     android:textSize="20sp"
-                    android:labelFor="@+id/adtitle"/>
+                    android:labelFor="@+id/adtitle"
+                    android:textColor="@color/black"/>
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="170dp"
                     android:gravity="center">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="300dp"
@@ -53,6 +55,7 @@
                         android:layout_margin="48dp"
                         android:id="@+id/adtitle"
                         />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -66,6 +69,7 @@
                         android:layout_marginBottom="10dp"
                         android:id="@+id/addescription"
                         android:hint="Descriere"
+                        android:textColorHint="@color/black"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +84,7 @@
                         android:layout_marginLeft="20dp"
                         android:id="@+id/address"
                         android:hint="Adresa"
+                        android:textColorHint="@color/black"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,6 +101,7 @@
                         android:id="@+id/phoneNo"
                         android:inputType="phone"
                         android:hint="Numar telefon (07xx)"
+                        android:textColorHint="@color/black"
                         android:maxLength="10"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +114,8 @@
                     android:layout_marginLeft="280dp"
                     android:src="@drawable/map"
                     app:cornerRadius="90dp"
-                    app:fabCustomSize="45dp" />
+                    app:fabCustomSize="45dp"
+                    android:backgroundTint="@color/green"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
@@ -118,7 +125,15 @@
                     android:layout_marginTop="620dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="10dp"
-                    app:cornerRadius="20dp"/>
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/green"/>
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Urgent?"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/isUrgent"/>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

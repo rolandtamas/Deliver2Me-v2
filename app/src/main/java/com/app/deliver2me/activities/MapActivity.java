@@ -51,6 +51,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private final int DEFAULT_ZOOM = 15;
     private Location location;
     private String tempTitle, tempDesc, tempPhoneNumber;
+    private boolean tempIsChecked;
     private LatLng position;
 
     @Override
@@ -69,6 +70,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         tempTitle = intent.getStringExtra("Title");
         tempDesc = intent.getStringExtra("Description");
         tempPhoneNumber = intent.getStringExtra("PhoneNumber");
+        tempIsChecked = intent.getBooleanExtra("isChecked",false);
     }
 
     private void setMapListeners() {
@@ -86,7 +88,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 String address = addressMap.getText().toString();
-                if (address.isEmpty()) {
+                if (address.isEmpty() || address.equals("Se cauta adresa...")) {
                     Toast.makeText(MapActivity.this, "Adresa incorecta sau inexistenta", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(MapActivity.this, NewEntryActivity.class);
@@ -94,6 +96,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     intent.putExtra("Title", tempTitle);
                     intent.putExtra("Description", tempDesc);
                     intent.putExtra("PhoneNumber", tempPhoneNumber);
+                    intent.putExtra("isChecked",tempIsChecked);
                     PositionHelper.getInstance().setPosition(position);
                     startActivity(intent);
                 }

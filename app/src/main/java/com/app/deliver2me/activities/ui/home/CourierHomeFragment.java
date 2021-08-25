@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.deliver2me.R;
 import com.app.deliver2me.adapters.EntryAdapter;
@@ -32,6 +33,7 @@ public class CourierHomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private EntryAdapter entryAdapter;
     private List<EntryViewModel> entryViewModelList;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -42,6 +44,7 @@ public class CourierHomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this).get(CourierHomeFragmentViewModel.class);
         View root = inflater.inflate(R.layout.fragment_courier_home, container, false);
         recyclerView = root.findViewById(R.id.adlist);
+        swipeRefreshLayout = root.findViewById(R.id.courierSwipeRefresh);
         entryViewModelList = new ArrayList<>();
         FirebaseHelper.adsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -57,6 +60,15 @@ public class CourierHomeFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                EntryAdapter refreshedAdapter = new EntryAdapter(entryViewModelList);
+                recyclerView.setAdapter(refreshedAdapter);
             }
         });
 

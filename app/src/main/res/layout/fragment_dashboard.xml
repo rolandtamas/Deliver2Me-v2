@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Anunturile mele"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:textColor="@color/black"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -38,7 +39,8 @@
             android:layout_marginEnd="50dp"
             android:background="@android:color/black"
             android:src="@drawable/ic_baseline_add_24"
-            app:fabSize="normal"/>
+            app:fabSize="normal"
+            android:backgroundTint="@color/green"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +49,8 @@
             android:layout_marginStart="64dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="5dp"
-            android:text="Adaugă un nou anunț" />
+            android:text="Adaugă un nou anunț"
+            android:textColor="@color/black"/>
     </RelativeLayout>
 
 

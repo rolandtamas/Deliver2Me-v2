@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Profilul meu"
-            android:textSize="55sp" />
+            android:textSize="50sp" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="340dp"
@@ -23,7 +23,7 @@
             android:layout_marginEnd="8dp"
             android:layout_gravity="center"
             app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/orange">
+            app:cardBackgroundColor="@color/browser_actions_bg_grey">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,13 +50,15 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="10dp"
                                     android:textSize="27sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"/>
                         </LinearLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="250dp"
                             android:layout_height="wrap_content"
                             android:hint="Nume"
+                            app:hintTextColor="@color/black"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:layout_width="match_parent"
@@ -69,6 +71,7 @@
                             android:layout_margin="10dp"
                             android:layout_height="wrap_content"
                             android:hint="Prenume"
+                            app:hintTextColor="@color/black"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:layout_width="match_parent"
@@ -80,6 +83,7 @@
                             android:layout_width="250dp"
                             android:layout_height="wrap_content"
                             android:hint="E-mail"
+                            app:hintTextColor="@color/black"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:layout_width="match_parent"
@@ -92,6 +96,7 @@
                             android:layout_margin="10dp"
                             android:layout_height="wrap_content"
                             android:hint="Parola noua"
+                            app:hintTextColor="@color/black"
                             app:endIconMode="password_toggle"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                                 <com.google.android.material.textfield.TextInputEditText
@@ -107,6 +112,7 @@
                             android:layout_marginTop="5dp"
                             android:id="@+id/saveChanges"
                             android:text="Salveaza modificarile"
+                            android:backgroundTint="@color/green"
                             app:cornerRadius="20dp"
                             />
                 </LinearLayout>

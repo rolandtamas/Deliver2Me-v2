@@ -1,5 +1,6 @@
 package com.app.deliver2me.holders;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ public class EntryViewHolder extends RecyclerView.ViewHolder {
     private TextView title;
     private TextView author;
     private ImageView userImage;
+    private ImageView priorityImage;
     private FirebaseUser user;
 
     public EntryViewHolder(@NonNull View itemView) {
@@ -28,6 +30,7 @@ public class EntryViewHolder extends RecyclerView.ViewHolder {
         title = itemView.findViewById(R.id.row_entry_title);
         author = itemView.findViewById(R.id.row_entry_author);
         userImage = itemView.findViewById(R.id.userImage);
+        priorityImage = itemView.findViewById(R.id.priority);
     }
 
     public void setValues(String title, String author)
@@ -41,6 +44,19 @@ public class EntryViewHolder extends RecyclerView.ViewHolder {
     {
         this.title.setText(title);
         this.author.setText(author);
+        Glide.with(itemView.getContext()).load(imageUri).into(userImage);
+    }
+
+    public void setValues(String title, String author, String imageUri, String priority)
+    {
+        this.title.setText(title);
+        this.author.setText(author);
+        if(priority.equals("urgent"))
+        {
+            priorityImage.setImageResource(R.drawable.priority);
+            priorityImage.setColorFilter(Color.RED);
+            itemView.findViewById(R.id.cardLayout).setBackgroundColor(Color.rgb(255,165,0));
+        }
         Glide.with(itemView.getContext()).load(imageUri).into(userImage);
     }
 }

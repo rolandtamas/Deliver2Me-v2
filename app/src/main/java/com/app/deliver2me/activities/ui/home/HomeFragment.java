@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.deliver2me.R;
 import com.app.deliver2me.adapters.EntryAdapter;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private EntryAdapter entryAdapter;
     private List<EntryViewModel> entryViewModelList;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         recyclerView = root.findViewById(R.id.adlist);
+        swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
 
         entryViewModelList = new ArrayList<>();
 
@@ -59,6 +62,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                EntryAdapter refreshedAdapter = new EntryAdapter(entryViewModelList);
+                recyclerView.setAdapter(refreshedAdapter);
             }
         });
 

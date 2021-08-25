@@ -121,8 +121,6 @@ public class StatusDialog extends DialogFragment {
                                                                 });
 
                                                                 FirebaseHelper.notificationsDatabase.child(title).removeValue();
-                                                                getActivity().finish();
-                                                                startActivity(new Intent(view.getContext(),CourierFrontPageActivity.class));
                                                             }
                                                         }
                                                     }

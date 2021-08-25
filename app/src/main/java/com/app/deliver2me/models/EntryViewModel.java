@@ -7,6 +7,32 @@ public class EntryViewModel {
     private String address;
     private String imageUri;
     private String phoneNo;
+    private String priority;
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public EntryViewModel(String title, String content, String author, String address, String imageUri, String phoneNo, boolean isUrgent) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.address = address;
+        this.imageUri = imageUri;
+        this.phoneNo = phoneNo;
+        if(isUrgent)
+        {
+            this.priority = "urgent";
+        }
+        else
+        {
+            this.priority = "normal";
+        }
+    }
 
     public String getPhoneNo() {
         return phoneNo;
@@ -23,6 +49,7 @@ public class EntryViewModel {
         this.address = address;
         this.imageUri = imageUri;
         this.phoneNo = phoneNo;
+        this.priority = "normal";
     }
 
     public EntryViewModel(String title, String content, String author, String imageUri) {

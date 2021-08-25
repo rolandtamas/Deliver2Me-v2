@@ -27,6 +27,7 @@ import static com.app.deliver2me.helpers.FirebaseHelper.usersDatabase;
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private MaterialButton resetButton;
+    private MaterialButton backToLoginButton;
     private TextInputEditText userEmail;
     private String email;
     private FirebaseAuth mAuth;
@@ -71,11 +72,21 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 }
             }
         });
+
+        backToLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+                intent.putExtra("Email",userEmail.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private void initializeViews() {
 
         resetButton = findViewById(R.id.resetPassButton);
+        backToLoginButton = findViewById(R.id.backToLoginButton);
         userEmail = findViewById(R.id.userEmail);
     }
 }

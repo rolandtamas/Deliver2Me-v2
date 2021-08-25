@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:text="Profilul meu"
-        android:textSize="55sp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/black"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mainForm"
@@ -27,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myProfile"
         app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="@color/orange">
+        app:cardBackgroundColor="@color/browser_actions_bg_grey">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +51,8 @@
                     android:layout_margin="10dp"
                     android:textStyle="bold"
                     android:textSize="27sp"
-                    android:id="@+id/userName"/>
+                    android:id="@+id/userName"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -58,7 +60,8 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Nume">
+                android:hint="Nume"
+                app:hintTextColor="@color/black">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +73,8 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
-                android:hint="Prenume">
+                android:hint="Prenume"
+                app:hintTextColor="@color/black">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,7 +86,8 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
-                android:hint="E-mail">
+                android:hint="E-mail"
+                app:hintTextColor="@color/black">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,7 +100,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
                 android:hint="Parola"
-                app:endIconMode="password_toggle">
+                app:endIconMode="password_toggle"
+                app:hintTextColor="@color/black">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,7 +115,8 @@
                 app:cornerRadius="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:id="@+id/saveChanges"/>
+                android:id="@+id/saveChanges"
+                android:backgroundTint="@color/green"/>
 
         </LinearLayout>
 

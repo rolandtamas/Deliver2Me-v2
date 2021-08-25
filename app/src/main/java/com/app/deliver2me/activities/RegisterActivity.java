@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private TextInputEditText firstNameEdit;
     private TextInputEditText lastNameEdit;
+
+    private TextInputLayout emailEditLayout;
     private TextInputEditText emailEdit;
 
     private TextInputEditText passEdit;
@@ -50,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private FirebaseAuth mAuth;
 
+    private final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
         initializeViews();
         setOnClickListeners();
         setPassFieldListener();
+        setEmailFieldListener();
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -113,7 +119,35 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void setEmailFieldListener()
+    {
+        emailEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if(!(emailEdit.getText().toString().trim().matches(String.valueOf(Patterns.EMAIL_ADDRESS))))
+                {
+                    emailEditLayout.setError("Introduceti o adresa valida");
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!(emailEdit.getText().toString().trim().matches(String.valueOf(Patterns.EMAIL_ADDRESS))))
+                {
+                    emailEditLayout.setError("Introduceti o adresa valida");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(emailEdit.getText().toString().trim().matches(String.valueOf(Patterns.EMAIL_ADDRESS)))
+                {
+                    emailEditLayout.setError(null);
+                }
+            }
+        });
     }
 
     private void setOnClickListeners() {
@@ -190,6 +224,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void initializeViews() {
         firstNameEdit = findViewById(R.id.register_firstNameEdit);
         lastNameEdit = findViewById(R.id.register_lastNameEdit);
+
+        emailEditLayout = findViewById(R.id.emailEditLayout);
         emailEdit = findViewById(R.id.register_emailEdit);
 
         passEdit = findViewById(R.id.register_passwordEdit);

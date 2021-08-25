@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange">
+        android:background="@color/browser_actions_bg_grey">
 
         <TextView
             android:id="@+id/my_row_entry_title"
@@ -21,7 +21,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="#DE000000"
+            android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/userImage" />
@@ -33,20 +33,20 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#8A000000"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/my_row_entry_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/userImage" />
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/userImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_baseline_account_circle_24"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_baseline_account_circle_24"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/my_row_delete"
@@ -55,14 +55,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="10dp"
-            android:minWidth="0dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textColor="#DE000000"
+            app:tint="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/userImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/ic_baseline_restore_from_trash_24"
+            android:backgroundTint="#ff0000"
             />
 
 
