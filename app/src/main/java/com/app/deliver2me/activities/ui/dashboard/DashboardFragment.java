@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import com.app.deliver2me.R;
 import com.app.deliver2me.activities.NewEntryActivity;
 import com.app.deliver2me.adapters.EntryAdapter;
 import com.app.deliver2me.adapters.MyEntryAdapter;
+import com.app.deliver2me.helpers.FirebaseHelper;
 import com.app.deliver2me.helpers.StorageHelper;
 import com.app.deliver2me.models.EntryViewModel;
 import com.app.deliver2me.models.User;
@@ -25,6 +27,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,8 @@ public class DashboardFragment extends Fragment {
     private MyEntryAdapter entryAdapter;
     private List<EntryViewModel> entryViewModelList;
     private RecyclerView recyclerView;
+    private TextView emptyRecyclerViewText;
+    private String thisUser;
 
     private FirebaseAuth mAuth;
 
@@ -49,11 +55,35 @@ public class DashboardFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!=null)
+        {
+            usersDatabase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    User model = snapshot.getValue(User.class);
+                    thisUser = model.getFirstName()+" "+model.getLastName();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
 
         recyclerView = root.findViewById(R.id.myads);
+        emptyRecyclerViewText = root.findViewById(R.id.emptyRecyclerViewText);
+
+        if(entryViewModelList.isEmpty())
+        {
+            emptyRecyclerViewText.setText("Nu aveți niciun anunț postat.");
+        }
 
         entryViewModelList = new ArrayList<>();
-        final String thisUser = StorageHelper.getInstance().getUserModel().getFirstName() + " " +StorageHelper.getInstance().getUserModel().getLastName();
+        //final String thisUser = StorageHelper.getInstance().getUserModel().getFirstName() + " " +StorageHelper.getInstance().getUserModel().getLastName();
         adsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -63,6 +93,7 @@ public class DashboardFragment extends Fragment {
                     if(model.getAuthor().equals(thisUser))
                     {
                         entryViewModelList.add(model);
+                        emptyRecyclerViewText.setText(null);
                     }
                 }
                 entryAdapter.notifyDataSetChanged();

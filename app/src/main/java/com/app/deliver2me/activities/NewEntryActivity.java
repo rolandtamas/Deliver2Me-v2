@@ -106,11 +106,11 @@ public class NewEntryActivity extends AppCompatActivity {
 
                 if(title.isEmpty() || description.isEmpty() || address.isEmpty() || phoneNumber.isEmpty())
                 {
-                    Toast.makeText(NewEntryActivity.this, "Nu toate campurile sunt completate!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewEntryActivity.this, "Nu toate câmpurile sunt completate!", Toast.LENGTH_SHORT).show();
                 }
                 else if(!phoneNumber.matches(phoneNumberPattern))
                 {
-                    Toast.makeText(NewEntryActivity.this, "Numarul de telefon are format gresit. Va rugam introduceti din nou", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewEntryActivity.this, "Numărul de telefon are format greșit. Vă rugăm introduceți din nou", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -131,7 +131,7 @@ public class NewEntryActivity extends AppCompatActivity {
                                 {
                                     adsDatabase.child(title).setValue(new EntryViewModel(title, description, author,address, model.getImageUri(),phoneNumber));
                                 }
-                                Toast.makeText(NewEntryActivity.this, "Anuntul a fost adaugat cu succes", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(NewEntryActivity.this, "Anunțul a fost adăugat cu succes", Toast.LENGTH_SHORT).show();
 
 //                                NotificationHelper.displayNotification(NewEntryActivity.this,"Anunt nou", author+" a postat un anunt nou: "+title);
                                 //send notification to all users that someone posted an ad
@@ -160,24 +160,26 @@ public class NewEntryActivity extends AppCompatActivity {
                             for(DataSnapshot ds : snapshot.getChildren())
                             {
                                 Token entry = ds.getValue(Token.class);
-                                NotificationModel notificationModel = new NotificationModel("Anunt nou", author+" a publicat un anunt: "+title);
+                                NotificationModel notificationModel = new NotificationModel("Anunț nou", author+" a publicat un anunț: "+title);
                                 NotificationBuilder notificationBuilder = new NotificationBuilder();
 
                                 notificationBuilder.setNotificationModel(notificationModel);
                                 notificationBuilder.setUserToken(entry.getToken());
-                                retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(notificationBuilder);
+                                if(!ds.getKey().equals(user.getUid()))
+                                {
+                                    retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(notificationBuilder);
+                                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                            //Toast.makeText(NewEntryActivity.this, "DONE", Toast.LENGTH_SHORT).show();
+                                        }
 
-                                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                        //Toast.makeText(NewEntryActivity.this, "DONE", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                        Toast.makeText(NewEntryActivity.this, "FAILED", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                            Toast.makeText(NewEntryActivity.this, "FAILED", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             }
                         }
 

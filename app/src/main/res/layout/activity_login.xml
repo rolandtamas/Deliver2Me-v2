@@ -45,7 +45,7 @@
         app:boxCornerRadiusTopEnd="20dp"
         app:boxCornerRadiusTopStart="20dp"
         android:labelFor="@+id/login_passwordEdit"
-        android:hint="Parola"
+        android:hint="Parolă"
         app:boxStrokeColor="@color/green"
         app:hintTextColor="@color/green"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -78,7 +78,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:cornerRadius="20dp"
         android:layout_marginTop="10dp"/>
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="25dp">
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
@@ -87,6 +90,15 @@
         android:text="Loghează-te"
         app:backgroundTint="@color/green"
         app:cornerRadius="20dp" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/loginSpinner"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="5dp"
+        android:indeterminate="true"/>
+</LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registerButton"

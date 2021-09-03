@@ -230,7 +230,7 @@ public class ViewAdActivity extends AppCompatActivity implements OnMapReadyCallb
                             {
                                 Token entry = ds.getValue(Token.class);
                                 toToken = entry.getToken();
-                                NotificationModel notificationModel = new NotificationModel("Deliver2Me", loggedInUser.getFirstName()+" "+loggedInUser.getLastName()+" ti-a preluat comanda!");
+                                NotificationModel notificationModel = new NotificationModel("Deliver2Me", loggedInUser.getFirstName()+" "+loggedInUser.getLastName()+" ți-a preluat comanda!");
                                 NotificationBuilder notificationBuilder = new NotificationBuilder();
 
                                 notificationBuilder.setNotificationModel(notificationModel);
@@ -240,7 +240,7 @@ public class ViewAdActivity extends AppCompatActivity implements OnMapReadyCallb
                                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                        Toast.makeText(ViewAdActivity.this, "DONE", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(ViewAdActivity.this, "DONE", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
@@ -344,7 +344,7 @@ public class ViewAdActivity extends AppCompatActivity implements OnMapReadyCallb
 
                     else
                     {
-                        Toast.makeText(ViewAdActivity.this, "Nu s-a putut accesa locatia curenta", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewAdActivity.this, "Nu s-a putut accesa locația curenta", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

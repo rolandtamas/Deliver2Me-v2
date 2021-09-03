@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/baloo"
-                android:text="Anunt nou"
+                android:text="Anunț nou"
                 android:textSize="30sp"
                 android:textColor="@color/black"/>
             <com.google.android.material.card.MaterialCardView
@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Titlul anuntului"
+                    android:text="Titlul anunțului"
                     android:layout_margin="18dp"
                     android:textSize="20sp"
                     android:labelFor="@+id/adtitle"
@@ -100,7 +100,7 @@
                         android:layout_marginLeft="20dp"
                         android:id="@+id/phoneNo"
                         android:inputType="phone"
-                        android:hint="Numar telefon (07xx)"
+                        android:hint="Număr de telefon (07xx)"
                         android:textColorHint="@color/black"
                         android:maxLength="10"
                         />
@@ -120,7 +120,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adauga anunt"
+                    android:text="Adaugă anunțul"
                     android:id="@+id/addNewAd"
                     android:layout_marginTop="620dp"
                     android:layout_marginLeft="10dp"

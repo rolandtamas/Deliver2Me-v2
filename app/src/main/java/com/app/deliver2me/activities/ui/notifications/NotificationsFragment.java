@@ -19,13 +19,19 @@ import com.app.deliver2me.adapters.NotificationsAdapter;
 import com.app.deliver2me.helpers.FirebaseHelper;
 import com.app.deliver2me.helpers.StorageHelper;
 import com.app.deliver2me.models.Notification;
+import com.app.deliver2me.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.app.deliver2me.helpers.FirebaseHelper.usersDatabase;
 
 public class NotificationsFragment extends Fragment {
 
@@ -33,6 +39,7 @@ public class NotificationsFragment extends Fragment {
     private RecyclerView recyclerView;
     private NotificationsAdapter notificationsAdapter;
     private List<Notification> notifications;
+    private String thisUser;
 
     private FirebaseAuth mAuth;
 
@@ -47,7 +54,24 @@ public class NotificationsFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-        final String thisUser = StorageHelper.getInstance().getUserModel().getFirstName() + " " +StorageHelper.getInstance().getUserModel().getLastName();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!=null)
+        {
+            usersDatabase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    User model = snapshot.getValue(User.class);
+                    thisUser = model.getFirstName()+" "+model.getLastName();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        //final String thisUser = StorageHelper.getInstance().getUserModel().getFirstName() + " " +StorageHelper.getInstance().getUserModel().getLastName();
 
         FirebaseHelper.notificationsDatabase.addValueEventListener(new ValueEventListener() {
             @Override

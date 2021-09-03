@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button registerButton;
     private Button forgotPasswordButton;
     private FirebaseAuth mAuth;
+
+    private ProgressBar loginSpinner;
 
     private String email;
     private String password;
@@ -106,6 +110,9 @@ public class LoginActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         forgotPasswordButton = findViewById(R.id.forgotPassButton);
 
+        loginSpinner = findViewById(R.id.loginSpinner);
+        loginSpinner.setVisibility(View.INVISIBLE);
+
     }
 
     private void setOnClickListeners()
@@ -115,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = emailField.getText().toString();
                 password = passField.getText().toString();
+                loginSpinner.setVisibility(View.VISIBLE);
                 doLogin();
                 SharedPreferences.Editor editor = getSharedPreferences("Remember", MODE_PRIVATE).edit();
                 if(rememberMeCheck.isChecked())
@@ -160,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         if(email.isEmpty() || password.isEmpty())
         {
             Toast.makeText(LoginActivity.this, "Nu ați completat toate câmpurile", Toast.LENGTH_SHORT).show();
+            loginSpinner.setVisibility(View.INVISIBLE);
         }
         else {
             mAuth.signInWithEmailAndPassword(email,password)
@@ -181,12 +190,14 @@ public class LoginActivity extends AppCompatActivity {
                                                 getTokenFromUserDevice();
                                                 Intent intent = new Intent(LoginActivity.this, CourierFrontPageActivity.class);
                                                 intent.putExtra("possibleNewPass",password);
+                                                loginSpinner.setVisibility(View.INVISIBLE);
                                                 startActivity(intent);
                                             }
                                             else{
                                                 getTokenFromUserDevice();
                                                 Intent intent = new Intent(LoginActivity.this,FrontPageActivity.class);
                                                 intent.putExtra("possibleNewPass",password);
+                                                loginSpinner.setVisibility(View.INVISIBLE);
                                                 startActivity(intent);
                                             }
                                         }
@@ -196,15 +207,16 @@ public class LoginActivity extends AppCompatActivity {
 
                                         }
                                     });
-
                                 }
                                 else
                                 {
                                     Toast.makeText(LoginActivity.this, "Conectare eșuată. Încercați din nou sau verificati-va e-mail-ul", Toast.LENGTH_SHORT).show();
+                                    loginSpinner.setVisibility(View.INVISIBLE);
                                 }
                             }
                             else{
                                 Toast.makeText(LoginActivity.this, "Conectare eșuată. Încercați din nou sau verificati-va e-mail-ul", Toast.LENGTH_SHORT).show();
+                                loginSpinner.setVisibility(View.INVISIBLE);
                             }
                         }
                     });

@@ -127,12 +127,14 @@ public class FrontPageActivity extends AppCompatActivity implements BottomNaviga
                 {
                     new AlertDialog.Builder(this)
                             .setTitle("Delogare")
-                            .setMessage("Sunteti sigur ca doriti sa va delogati?")
+                            .setMessage("Sunteți sigur că doriți să vă delogați?")
                             .setPositiveButton(R.string.Da, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     mAuth.signOut();
                                     Intent intent = new Intent(FrontPageActivity.this, LoginActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                 }
                             })

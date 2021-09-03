@@ -88,8 +88,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 String address = addressMap.getText().toString();
-                if (address.isEmpty() || address.equals("Se cauta adresa...")) {
-                    Toast.makeText(MapActivity.this, "Adresa incorecta sau inexistenta", Toast.LENGTH_SHORT).show();
+                if (address.isEmpty() || address.equals("Se caută adresa...")) {
+                    Toast.makeText(MapActivity.this, "Adresă incorectă sau inexistentă", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(MapActivity.this, NewEntryActivity.class);
                     intent.putExtra("Address", address);
@@ -135,7 +135,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     
                     else
                     {
-                        Toast.makeText(MapActivity.this, "Nu s-a putut accesa locatia curenta", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MapActivity.this, "Nu s-a putut accesa locația curentă", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -158,7 +158,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             List<Address> addresses = geo.getFromLocation(INEU.latitude,INEU.longitude,1);
             if(addresses.isEmpty())
             {
-                addressMap.setText("Se cauta adresa...");
+                addressMap.setText("Se caută adresa...");
             }
             else {
                 if(addresses.size() > 0)
@@ -189,17 +189,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onCameraMove() {
-        addressMap.setText("Se cauta adresa...");
+        addressMap.setText("Se caută adresa...");
     }
 
     @Override
     public void onCameraMoveStarted(int i) {
-        addressMap.setText("Se cauta adresa...");
+        addressMap.setText("Se caută adresa...");
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        addressMap.setText("Se cauta adresa...");
+        addressMap.setText("Se caută adresa...");
         map = googleMap;
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(INEU,DEFAULT_ZOOM));
         setMapListeners();

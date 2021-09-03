@@ -7,8 +7,8 @@
     <string name="Da">Da</string>
     <string name="Nu">Nu</string>
     <string-array name="status">
-        <item>In livrare</item>
-        <item>Livrata</item>
-        <item>Anulata</item>
+        <item>În livrare</item>
+        <item>Livrată</item>
+        <item>Anulată</item>
     </string-array>
 </resources>

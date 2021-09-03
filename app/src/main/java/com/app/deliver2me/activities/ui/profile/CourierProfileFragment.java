@@ -28,6 +28,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -51,6 +54,7 @@ public class CourierProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    private User thisUser;
 
     private StorageReference mStorageRef;
 
@@ -75,21 +79,36 @@ public class CourierProfileFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-
-        if(StorageHelper.getInstance().getUserModel().getImageUri() == null)
+        if(user!=null)
         {
-            userPicture.setImageResource(R.drawable.ic_baseline_account_circle_24);
-        }
-        else
-        {
-            Glide.with(this.getContext()).load(StorageHelper.getInstance().getUserModel().getImageUri()).into(userPicture);
+            usersDatabase.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    thisUser = snapshot.getValue(User.class);
+                    if(thisUser.getImageUri() == null)
+                    {
+                        userPicture.setImageResource(R.drawable.ic_baseline_account_circle_24);
+                    }
+                    else
+                    {
+                        Glide.with(getContext()).load(thisUser.getImageUri()).into(userPicture);
+                    }
+
+                    userName.setText(thisUser.getFirstName() +" "+thisUser.getLastName());
+                    firstName.setText(thisUser.getFirstName());
+                    lastName.setText(thisUser.getLastName());
+                    email.setText(thisUser.getEmail());
+                    password.setText(thisUser.getPassword());
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
         }
 
-        userName.setText(StorageHelper.getInstance().getUserModel().getFirstName() +" "+StorageHelper.getInstance().getUserModel().getLastName());
-        firstName.setText(StorageHelper.getInstance().getUserModel().getFirstName());
-        lastName.setText(StorageHelper.getInstance().getUserModel().getLastName());
-        email.setText(StorageHelper.getInstance().getUserModel().getEmail());
-        password.setText(StorageHelper.getInstance().getUserModel().getPassword());
+
 
         userPicture.setOnClickListener(new View.OnClickListener() {
             @Override

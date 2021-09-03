@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="8dp"
-                android:hint="Parola"
+                android:hint="Parola nouă"
                 app:endIconMode="password_toggle"
                 app:hintTextColor="@color/black">
                 <com.google.android.material.textfield.TextInputEditText
@@ -111,7 +111,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salveaza modificarile"
+                android:text="Salvează modificările"
                 app:cornerRadius="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"

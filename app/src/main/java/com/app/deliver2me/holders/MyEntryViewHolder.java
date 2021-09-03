@@ -49,14 +49,14 @@ public class MyEntryViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 //deletes my ad
                 new AlertDialog.Builder(itemView.getContext())
-                        .setTitle("Stergere intrare")
-                        .setMessage("Sunteti sigur ca doriti sa stergeti intrarea?")
+                        .setTitle("Ștergere intrare")
+                        .setMessage("Sunteți sigur că doriți sa ștergeți intrarea?")
                         .setPositiveButton(R.string.Da, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 adsDatabase.child(title.getText().toString()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(itemView.getContext(), "S-a sters cu succes", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(itemView.getContext(), "S-a șters cu succes", Toast.LENGTH_SHORT).show();
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {

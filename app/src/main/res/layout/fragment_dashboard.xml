@@ -7,13 +7,20 @@
     tools:context=".activities.ui.dashboard.DashboardFragment"
     android:orientation="vertical"
     android:gravity="center">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anunturile mele"
-        android:textSize="30sp"
-        android:textColor="@color/black"/>
+        android:text="Anunțurile mele"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyRecyclerViewText"
+        android:textSize="20sp"/>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="440dp"
@@ -49,9 +56,7 @@
             android:layout_marginStart="64dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="5dp"
-            android:text="Adaugă un nou anunț"
+            android:text="Adaugă un anunț nou"
             android:textColor="@color/black"/>
     </RelativeLayout>
-
-
 </LinearLayout>

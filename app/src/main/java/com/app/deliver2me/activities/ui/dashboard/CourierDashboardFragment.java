@@ -38,6 +38,7 @@ public class CourierDashboardFragment extends Fragment {
     private CourierDashboardFragmentViewModel dashboardViewModel;
     private List<EntryViewModel> entryViewModelList;
     private RecyclerView recyclerView;
+    private TextView emptyRecyclerViewText;
     private TakenEntryAdapter takenEntryAdapter;
     private User loggedInUser;
     private String author, firstName, lastName;
@@ -57,6 +58,11 @@ public class CourierDashboardFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         recyclerView = root.findViewById(R.id.takenAds);
         entryViewModelList = new ArrayList<>();
+        emptyRecyclerViewText = root.findViewById(R.id.emptyRecyclerViewText);
+        if(entryViewModelList.isEmpty())
+        {
+            emptyRecyclerViewText.setText("Nu aveți niciun anunț preluat.");
+        }
 
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -103,6 +109,7 @@ public class CourierDashboardFragment extends Fragment {
                                         {
                                             EntryViewModel newEntry = new EntryViewModel(takenAd.getTitle(),takenAd.getBody(),takenAd.getAuthor(),takenAd.getAddress(), model.getImageUri(),takenAd.getAuthorPhoneNo());
                                             entryViewModelList.add(newEntry);
+                                            emptyRecyclerViewText.setText(null);
                                             takenEntryAdapter.notifyDataSetChanged();
                                         }
                                     }

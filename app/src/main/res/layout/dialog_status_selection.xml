@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:inputType="none"
             android:textStyle="bold"
-            android:text="Selecteaza statusul..." />
+            android:text="Selectează statusul..." />
 
     </com.google.android.material.textfield.TextInputLayout>
 

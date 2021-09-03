@@ -95,7 +95,7 @@
                             android:layout_width="250dp"
                             android:layout_margin="10dp"
                             android:layout_height="wrap_content"
-                            android:hint="Parola noua"
+                            android:hint="Parola nouă"
                             app:hintTextColor="@color/black"
                             app:endIconMode="password_toggle"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">

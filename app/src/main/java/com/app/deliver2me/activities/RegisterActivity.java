@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(passEdit.getText().toString().length()<6)
                 {
-                    passEditLayout.setError("Parola prea scurta");
+                    passEditLayout.setError("Parola prea scurtă");
                 }
             }
 
@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(passEdit.getText().toString().length()<6)
                 {
-                    passEditLayout.setError("Parola prea scurta");
+                    passEditLayout.setError("Parola prea scurtă");
                 }
             }
 
@@ -128,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(!(emailEdit.getText().toString().trim().matches(String.valueOf(Patterns.EMAIL_ADDRESS))))
                 {
-                    emailEditLayout.setError("Introduceti o adresa valida");
+                    emailEditLayout.setError("Introduceți o adresă validă");
                 }
             }
 
@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(!(emailEdit.getText().toString().trim().matches(String.valueOf(Patterns.EMAIL_ADDRESS))))
                 {
-                    emailEditLayout.setError("Introduceti o adresa valida");
+                    emailEditLayout.setError("Introduceți o adresă validă");
                 }
             }
 
@@ -199,7 +199,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     {
                                             User courierModel = new User(firstName,lastName,email,password,isCourier);
                                             usersDatabase.child(user.getUid()).setValue(courierModel);
-                                            Toast.makeText(RegisterActivity.this, "Înregistrat cu succes. Va rugam sa va verificati adresa de e-mail", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterActivity.this, "Înregistrat cu succes. Vă rugăm să verificați adresa de e-mail", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             intent.putExtra("email",email);
                                             intent.putExtra("password",password);
@@ -211,10 +211,10 @@ public class RegisterActivity extends AppCompatActivity {
                         else {
                             if(mAuth.getCurrentUser().getEmail().equals(email))
                             {
-                                Toast.makeText(RegisterActivity.this, "Acest email este deja folosit", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Acest e-mail este deja folosit", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                            Toast.makeText(RegisterActivity.this, "Hopa! Înregistrarea a eșuat. Verifică conexiunea la internet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Hopa! Înregistrarea a eșuat. Verifică conexiunea la Internet", Toast.LENGTH_LONG).show();
                             }
                         }
                     }

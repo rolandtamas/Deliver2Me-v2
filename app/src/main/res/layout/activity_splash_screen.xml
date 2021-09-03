@@ -14,10 +14,10 @@
     android:id="@+id/welcomeLogo"
     android:src="@drawable/favicon"/>
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:progressBackgroundTint="@color/green"/>
+        android:indeterminate="true"/>
 </LinearLayout>

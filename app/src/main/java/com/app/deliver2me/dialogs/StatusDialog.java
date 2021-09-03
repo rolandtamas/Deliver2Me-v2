@@ -2,6 +2,7 @@ package com.app.deliver2me.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.app.deliver2me.R;
@@ -74,15 +77,15 @@ public class StatusDialog extends DialogFragment {
         apiService = Client.getClient("https://fcm.googleapis.com").create(APIService.class);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setPositiveButton("Aplica", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Aplică", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String statusFromDialog = autoCompleteTextView.getText().toString();
                         switch (statusFromDialog)
                         {
-                            case "Livrata":
-                                Toast.makeText(view.getContext(), "Selected livrata", Toast.LENGTH_SHORT).show();
-                                NotificationModel notificationModel = new NotificationModel("Deliver2Me","Comanda ta a fost livrata. Multumim!");
+                            case "Livrată":
+                                //Toast.makeText(view.getContext(), "Selected livrată", Toast.LENGTH_SHORT).show();
+                                NotificationModel notificationModel = new NotificationModel("Deliver2Me","Comanda ta a fost livrată. Mulțumim!");
                                 NotificationBuilder notificationBuilder = new NotificationBuilder();
 
                                 FirebaseHelper.usersDatabase.addValueEventListener(new ValueEventListener() {
@@ -111,7 +114,7 @@ public class StatusDialog extends DialogFragment {
                                                                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                                                     @Override
                                                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                                        Toast.makeText(view.getContext(), "DONE", Toast.LENGTH_SHORT).show();
+
                                                                     }
 
                                                                     @Override
@@ -121,6 +124,16 @@ public class StatusDialog extends DialogFragment {
                                                                 });
 
                                                                 FirebaseHelper.notificationsDatabase.child(title).removeValue();
+                                                                Toast.makeText(view.getContext(), "Livrată", Toast.LENGTH_SHORT).show();
+                                                                new Handler().postDelayed(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        Intent intent = new Intent(view.getContext(), CourierFrontPageActivity.class);
+                                                                        view.getContext().startActivity(intent);
+                                                                        //finish
+                                                                    }
+                                                                },2000);
+
                                                             }
                                                         }
                                                     }
@@ -143,9 +156,9 @@ public class StatusDialog extends DialogFragment {
                                 //delete from couriers taken list and send a notification to author
                                 break;
 
-                            case "In livrare":
+                            case "În livrare":
                                 Toast.makeText(view.getContext(), "Selected in livrare", Toast.LENGTH_SHORT).show();
-                                NotificationModel notificationModel2 = new NotificationModel("Deliver2Me","Comanda ta este in curs de livrare!");
+                                NotificationModel notificationModel2 = new NotificationModel("Deliver2Me","Comanda ta este în curs de livrare!");
                                 NotificationBuilder notificationBuilder2 = new NotificationBuilder();
 
                                 FirebaseHelper.usersDatabase.addValueEventListener(new ValueEventListener() {
@@ -174,7 +187,7 @@ public class StatusDialog extends DialogFragment {
                                                                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                                                     @Override
                                                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                                        Toast.makeText(view.getContext(), "DONE", Toast.LENGTH_SHORT).show();
+                                                                        //Toast.makeText(view.getContext(), "DONE", Toast.LENGTH_SHORT).show();
                                                                     }
 
                                                                     @Override
@@ -204,10 +217,10 @@ public class StatusDialog extends DialogFragment {
                                 //send a notification to author
                                 break;
 
-                            case "Anulata":
+                            case "Anulată":
                                 Toast.makeText(view.getContext(), "Selected anulata", Toast.LENGTH_SHORT).show();
 
-                                NotificationModel notificationModel3 = new NotificationModel("Deliver2Me","Comanda ta a fost anulata!");
+                                NotificationModel notificationModel3 = new NotificationModel("Deliver2Me","Comanda ta a fost anulată!");
                                 NotificationBuilder notificationBuilder3 = new NotificationBuilder();
 
 
@@ -237,7 +250,7 @@ public class StatusDialog extends DialogFragment {
                                                                 responseBodyCall.enqueue(new Callback<ResponseBody>() {
                                                                     @Override
                                                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                                        Toast.makeText(view.getContext(), "DONE", Toast.LENGTH_SHORT).show();
+
                                                                     }
 
                                                                     @Override
@@ -247,8 +260,15 @@ public class StatusDialog extends DialogFragment {
                                                                 });
 
                                                                 FirebaseHelper.notificationsDatabase.child(title).removeValue();
-                                                                getActivity().finish();
-                                                                startActivity(new Intent(view.getContext(),CourierFrontPageActivity.class));
+                                                                Toast.makeText(view.getContext(), "Anulată", Toast.LENGTH_SHORT).show();
+                                                                new Handler().postDelayed(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        Intent intent = new Intent(view.getContext(), CourierFrontPageActivity.class);
+                                                                        view.getContext().startActivity(intent);
+                                                                        //finish
+                                                                    }
+                                                                },2000);
                                                             }
                                                         }
                                                     }
@@ -276,13 +296,13 @@ public class StatusDialog extends DialogFragment {
                         }
                     }
                 })
-                .setNegativeButton("Anuleaza", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Anulează", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getDialog().dismiss();
                     }
                 })
-                .setTitle("Selecteaza statusul");
+                .setTitle("Selectează statusul");
 
         builder.setView(view);
 
